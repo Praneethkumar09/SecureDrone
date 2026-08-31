@@ -52,7 +52,7 @@ The main objectives of the SecureDrone project are:
 
 ---
 
-# 🛠️ Technologies Used
+🛠️ Technologies Used
 
 | Technology | Purpose |
 |------------|---------|
@@ -68,12 +68,12 @@ The main objectives of the SecureDrone project are:
 | 🐙 GitHub | Project repository |
 
 ---
-
-# 🏗️ System Architecture
+----
+ 🏗️ System Architecture
 
 The SecureDrone system follows a simple layered architecture:
 
-```text
+
                  ┌─────────────────────────┐
                  │       User / Admin      │
                  └────────────┬────────────┘
@@ -113,6 +113,12 @@ The SecureDrone system follows a simple layered architecture:
                  │     database.py         │
                  │        SQLite           │
                  └─────────────────────────┘
+----
+
+
+
+---
+📂 Project Structure
 
 SecureDrone/
 │
@@ -141,7 +147,9 @@ SecureDrone/
 ├── README.md
 └── .gitignore
 
+----
 📄 File Description
+
 app.py
 
 The main Flask application.
@@ -155,9 +163,7 @@ Loading telemetry information
 Displaying security alerts
 Displaying encrypted data
 Managing dashboard navigation
-
-Main routes include:
-
+Main Routes
 /
  /dashboard
  /drone-monitor
@@ -176,9 +182,7 @@ Telemetry storage
 Encrypted telemetry retrieval
 Security alert storage
 Security alert retrieval
-
-The database contains tables such as:
-
+Database Tables
 drone_telemetry
 security_alerts
 encryption.py
@@ -192,24 +196,20 @@ Fernet Symmetric Encryption
 The encryption key is stored in:
 
 data/secret.key
-
-The basic process is:
-
+Encryption Process
 Drone Telemetry
        ↓
-Encryption
+   Encryption
        ↓
 Encrypted Data
        ↓
 SQLite Database
-
-When the data is required:
-
+Decryption Process
 SQLite Database
        ↓
 Encrypted Data
        ↓
-Decryption
+   Decryption
        ↓
 Original Telemetry
 telemetry.py
@@ -227,11 +227,13 @@ GPS Status
 
 This allows the project to demonstrate drone monitoring without requiring an actual physical drone.
 
+----
 🖥️ Web Application Modules
+
+
 🏠 1. Dashboard
 
-The dashboard provides an overview of the SecureDrone system.
-
+The Dashboard provides an overview of the SecureDrone system.
 It can display:
 
 Drone status
@@ -241,12 +243,12 @@ Speed
 Battery level
 GPS status
 Security status
+
 🚁 2. Drone Monitor
 
 The Drone Monitor displays simulated telemetry information.
 
-Example:
-
+Example
 Drone ID       : DRN_001
 Latitude       : 14.6819
 Longitude      : 77.6006
@@ -261,8 +263,7 @@ The telemetry can be generated dynamically using telemetry.py.
 
 The Security Alerts page displays detected security events.
 
-Example threats include:
-
+Example Threats
 GPS Spoofing
 Unauthorized Access
 Communication Interception
@@ -278,6 +279,7 @@ Drone ID
 Description
 Status
 Timestamp
+
 🔐 4. Data Protection
 
 The Data Protection module demonstrates protection of sensitive drone telemetry.
@@ -303,14 +305,12 @@ Packet Integrity
 Packet Loss
 Unknown Packets
 Interception Attempts
-
-It also demonstrates security controls such as:
-
-Data Encryption
-Authentication
-Packet Integrity
-Intrusion Detection
-Signal Monitoring
+Security Controls
+🔐 Data Encryption
+🔑 Authentication
+🛡️ Packet Integrity
+🚨 Intrusion Detection
+📡 Signal Monitoring
 📋 6. Security Logs
 
 The Security Logs page displays historical security events.
@@ -326,7 +326,7 @@ Description
 Status
 
 This allows administrators to review previous security events.
-
+----
 🔐 Security Features
 
 SecureDrone demonstrates several important cybersecurity concepts.
@@ -336,10 +336,11 @@ SecureDrone demonstrates several important cybersecurity concepts.
 Sensitive telemetry is encrypted before storage.
 
 Plain Telemetry
-      ↓
+       ↓
 Fernet Encryption
-      ↓
+       ↓
 Encrypted Data
+
 2. Secure Storage
 
 Encrypted telemetry is stored inside an SQLite database.
@@ -347,6 +348,7 @@ Encrypted telemetry is stored inside an SQLite database.
 SQLite
    ↓
 Encrypted Telemetry
+
 3. Authentication Monitoring
 
 The dashboard provides security information regarding authenticated communication.
@@ -357,7 +359,7 @@ The system demonstrates packet integrity verification to identify unauthorized m
 
 5. Threat Detection
 
-The system displays possible threats such as:
+The project considers possible threats such as:
 
 GPS Spoofing
 Man-in-the-Middle Attacks
@@ -365,13 +367,12 @@ Packet Injection
 Replay Attacks
 Signal Jamming
 Unauthorized Devices
+
 6. Security Logging
 
 Security-related events are recorded and displayed through the Security Logs module.
 
 🚨 Threats Considered
-
-The project demonstrates monitoring for several common drone cybersecurity threats.
 
 Threat	Description
 GPS Spoofing	Manipulation of GPS information
@@ -382,26 +383,23 @@ Replay Attack	Reuse of previously captured communication
 Man-in-the-Middle	Interception of communication
 Signal Jamming	Disruption of communication signals
 Geofence Breach	Drone entering a restricted area
+----
+
 💾 Database
 
 SecureDrone uses SQLite for data storage.
 
-Database file:
-
+Database File
 data/securedrone.db
 Drone Telemetry Table
 drone_telemetry
-
-Example fields:
-
+Fields
 id
 encrypted_data
 timestamp
 Security Alerts Table
 security_alerts
-
-Example fields:
-
+Fields
 id
 alert_type
 severity
@@ -409,6 +407,7 @@ drone_id
 description
 status
 timestamp
+
 🔑 Encryption
 
 SecureDrone uses the Python cryptography library and Fernet symmetric encryption.
@@ -416,9 +415,7 @@ SecureDrone uses the Python cryptography library and Fernet symmetric encryption
 The encryption key is generated automatically if it does not already exist.
 
 data/secret.key
-
-Example process:
-
+Encryption Workflow
 Telemetry Data
       │
       ▼
@@ -429,9 +426,7 @@ Encrypted String
       │
       ▼
 SQLite Database
-
-For authorized retrieval:
-
+Decryption Workflow
 SQLite Database
       │
       ▼
@@ -442,6 +437,7 @@ Fernet Decryption
       │
       ▼
 Telemetry Data
+
 ⚙️ Installation
 1. Clone the Repository
 git clone https://github.com/YOUR-USERNAME/SecureDrone.git
@@ -449,32 +445,35 @@ git clone https://github.com/YOUR-USERNAME/SecureDrone.git
 Move into the project directory:
 
 cd SecureDrone
+
 🐍 2. Create Virtual Environment
 
-Windows:
+For Windows:
 
 python -m venv venv
 
-Activate it:
+Activate the virtual environment:
 
 venv\Scripts\Activate.ps1
 
-If PowerShell blocks activation, use:
+If PowerShell blocks activation, run:
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 
-Then:
+Then activate:
 
 venv\Scripts\Activate.ps1
+
 📦 3. Install Dependencies
 
 Run:
 
 pip install -r requirements.txt
 
-If requirements.txt is not available, install the required packages:
+If requirements.txt is not available:
 
 pip install flask cryptography
+
 ▶️ 4. Run the Application
 
 Start the Flask application:
@@ -485,9 +484,10 @@ You should see something similar to:
 
 * Running on http://127.0.0.1:5000
 
-Open your browser and visit:
+Open the browser and visit:
 
 http://127.0.0.1:5000
+
 🖥️ Application Pages
 
 After starting the application, the following pages are available:
@@ -500,6 +500,7 @@ Security Alerts	/alerts
 Data Protection	/data-protection
 Communication	/communication
 Security Logs	/security-logs
+
 🔄 Application Workflow
 
 The overall workflow is:
@@ -521,6 +522,7 @@ Generate Security Alerts
 Display Information
           ↓
 Maintain Security Logs
+
 📊 Example Telemetry
 
 Example simulated telemetry:
@@ -531,32 +533,31 @@ Altitude    : 120 m
 Speed       : 35 km/h
 Battery     : 82%
 GPS Status  : ACTIVE
+
 🚨 Example Security Alerts
-
-Example alerts generated by the system:
-
 GPS Spoofing
-Severity: HIGH
-Drone: DRN_001
-Status: DETECTED
+Severity : HIGH
+Drone    : DRN_001
+Status   : DETECTED
 Unauthorized Access
-Severity: HIGH
-Drone: DRN_002
-Status: BLOCKED
+Severity : HIGH
+Drone    : DRN_002
+Status   : BLOCKED
 Communication Interception
-Severity: MEDIUM
-Drone: DRN_003
-Status: MONITORING
+Severity : MEDIUM
+Drone    : DRN_003
+Status   : MONITORING
+
 🧪 Testing
 
-The application can be tested by checking:
+The application can be tested using the following commands.
 
-Database
+Test Database
 python database.py
 
 This creates the database and displays security alerts.
 
-Encryption
+Test Encryption
 python encryption.py
 
 This demonstrates:
@@ -566,12 +567,13 @@ Original Data
 Encrypted Data
       ↓
 Decrypted Data
-Flask Application
+Test Flask Application
 python app.py
 
 Then open:
 
 http://127.0.0.1:5000
+
 🔒 Security Considerations
 
 This project is developed as an educational mini project and prototype.
@@ -593,13 +595,11 @@ Certificate-based authentication
 Audit logging
 Cloud security
 Secure API authentication
+
 🚀 Future Enhancements
-
-The project can be extended with:
-
 1. Real Drone Integration
 
-Connect the system with an actual drone using:
+Connect the system with an actual drone using technologies such as:
 
 MAVLink
 DroneKit
@@ -627,15 +627,13 @@ Unauthorized Devices
 
 Machine learning can be used to classify suspicious telemetry behavior.
 
-Example:
-
 Normal Telemetry
        ↓
-ML Model
+    ML Model
        ↓
 Threat Classification
        ↓
-Security Alert
+ Security Alert
 5. Real-Time Dashboard
 
 Add WebSocket-based live updates for:
@@ -644,8 +642,8 @@ GPS
 Battery
 Speed
 Altitude
-Signal strength
-Security alerts
+Signal Strength
+Security Alerts
 6. Multi-Drone Support
 
 The system can be extended to monitor multiple drones:
@@ -654,6 +652,7 @@ DRN_001
 DRN_002
 DRN_003
 DRN_004
+
 🎓 Academic Use
 
 SecureDrone can be used as a B.Tech / Engineering Mini Project demonstrating concepts from:
@@ -682,21 +681,18 @@ Telemetry monitoring
 Security alert management
 Cybersecurity threat concepts
 Git and GitHub version control
+
 👨‍💻 Project Information
-
-Project Name: SecureDrone
-
-Project Type: Mini Project
-
-Domain: Drone Cyber Security
-
-Backend: Python + Flask
-
-Database: SQLite
-
-Encryption: Fernet
-
-Frontend: HTML5 + CSS3
+Category	Details
+Project Name	SecureDrone
+Project Type	Mini Project
+Domain	Drone Cyber Security
+Backend	Python + Flask
+Database	SQLite
+Encryption	Fernet
+Frontend	HTML5 + CSS3
+Version Control	Git
+Repository	GitHub
 
 📜 Disclaimer
 
@@ -722,10 +718,13 @@ Database Security
        +
 Web Development
        =
-SecureDrone
+   SecureDrone
 
 The system provides a foundation that can be further developed into a real-time drone cybersecurity platform.
 
 ⭐ Support
 
 If you find this project useful, consider giving the repository a ⭐ on GitHub.
+
+
+
