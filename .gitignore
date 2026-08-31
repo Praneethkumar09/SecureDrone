@@ -1,0 +1,18 @@
+# Virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Database
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Encryption keys
+data/secret.key
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
