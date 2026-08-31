@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureDrone - Data Protection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* =========================================
+           SIDEBAR NAVIGATION FIX
+        ========================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            z-index: 9999;
+        }
+
+        .sidebar .menu {
+            position: relative;
+            z-index: 10000;
+        }
+
+        .sidebar .menu a {
+            display: block;
+            position: relative;
+            z-index: 10001;
+            pointer-events: auto;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .main {
+            margin-left: 250px;
+        }
+
+
+        /* =========================================
+           ENCRYPTED DATA BOX
+        ========================================= */
+
+        .encrypted-box {
+
+            background: #111827;
+
+            color: #22c55e;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            overflow-wrap: anywhere;
+
+            word-break: break-word;
+
+            font-family: Consolas,
+                         "Courier New",
+                         monospace;
+
+            line-height: 1.7;
+
+            min-height: 80px;
+
+        }
+
+
+        /* =========================================
+           SECURITY BADGES
+        ========================================= */
+
+        .security-badge {
+
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        .badge-green {
+
+            background: #dcfce7;
+
+            color: #166534;
+
+        }
+
+
+        .badge-blue {
+
+            background: #dbeafe;
+
+            color: #1e40af;
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+
+                width: 210px;
+
+            }
+
+            .main {
+
+                margin-left: 210px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        🚁 SecureDrone
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <a href="{{ url_for('dashboard') }}">
+
+            🏠 Dashboard
+
+        </a>
+
+
+
+        <!-- ================= DRONE MONITOR ================= -->
+
+        <a href="{{ url_for('drone_monitor') }}">
+
+            🚁 Drone Monitor
+
+        </a>
+
+
+
+        <!-- ================= SECURITY ALERTS ================= -->
+
+        <a href="{{ url_for('alerts') }}">
+
+            🚨 Security Alerts
+
+        </a>
+
+
+
+        <!-- ================= DATA PROTECTION ================= -->
+
+        <a href="{{ url_for('data_protection') }}"
+           class="active">
+
+            🔐 Data Protection
+
+        </a>
+
+
+
+        <!-- ================= COMMUNICATION ================= -->
+
+        <a href="{{ url_for('communication') }}">
+
+            📡 Communication
+
+        </a>
+
+
+
+        <!-- ================= SECURITY LOGS ================= -->
+
+        <a href="{{ url_for('security_logs') }}">
+
+            📋 Security Logs
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="main">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="header">
+
+
+        <div>
+
+            <h1>
+                Data Protection Center
+            </h1>
+
+            <p>
+                Secure Drone Telemetry Encryption & Protection
+            </p>
+
+        </div>
+
+
+        <div class="status">
+
+            🟢 Protection Active
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         PROTECTION CARDS
+    ================================================== -->
+
+    <div class="cards">
+
+
+        <!-- ENCRYPTION -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <h3>
+                    Encryption
+                </h3>
+
+                <h2>
+                    ACTIVE
+                </h2>
+
+                <p>
+                    Data encrypted
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DATA SECURITY -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h3>
+                    Data Security
+                </h3>
+
+                <h2>
+                    SECURE
+                </h2>
+
+                <p>
+                    Unauthorized access blocked
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- KEY -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔑
+            </div>
+
+            <div>
+
+                <h3>
+                    Key Status
+                </h3>
+
+                <h2>
+                    PROTECTED
+                </h2>
+
+                <p>
+                    Secret key secured
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STORAGE -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🗄️
+            </div>
+
+            <div>
+
+                <h3>
+                    Storage
+                </h3>
+
+                <h2>
+                    SQLITE
+                </h2>
+
+                <p>
+                    Protected database
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         ENCRYPTED DATA
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🔒 Encrypted Drone Telemetry
+        </h2>
+
+
+        <p style="
+            color:#64748b;
+            margin-bottom:20px;
+        ">
+
+            Sensitive drone telemetry is encrypted before
+            being stored in the database.
+
+        </p>
+
+
+        <div class="encrypted-box">
+
+
+            {% if encrypted_data %}
+
+                {{ encrypted_data }}
+
+            {% else %}
+
+                No encrypted telemetry available.
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         AUTHORIZED DECRYPTED DATA
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🔓 Authorized Decrypted Data
+        </h2>
+
+
+        <p style="
+            color:#64748b;
+            margin-bottom:20px;
+        ">
+
+            Only the authorized application can decrypt
+            the protected telemetry data.
+
+        </p>
+
+
+        {% if telemetry %}
+
+
+        <div class="telemetry">
+
+
+            <!-- LATITUDE -->
+
+            <div>
+
+                <span>
+                    Latitude
+                </span>
+
+                <strong>
+
+                    {{ telemetry.latitude }}°
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- LONGITUDE -->
+
+            <div>
+
+                <span>
+                    Longitude
+                </span>
+
+                <strong>
+
+                    {{ telemetry.longitude }}°
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- ALTITUDE -->
+
+            <div>
+
+                <span>
+                    Altitude
+                </span>
+
+                <strong>
+
+                    {{ telemetry.altitude }} m
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- SPEED -->
+
+            <div>
+
+                <span>
+                    Speed
+                </span>
+
+                <strong>
+
+                    {{ telemetry.speed }} km/h
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- BATTERY -->
+
+            <div>
+
+                <span>
+                    Battery
+                </span>
+
+                <strong>
+
+                    {{ telemetry.battery }}%
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="alert-box">
+
+            <div>
+
+                <strong>
+                    ⚠️ No Telemetry Available
+                </strong>
+
+                <p>
+                    No decrypted drone telemetry is
+                    currently available.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         DATABASE INFORMATION
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🗄️ Protected Database Information
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <!-- RECORD ID -->
+
+            <div>
+
+                <span>
+                    Record ID
+                </span>
+
+                <strong>
+
+                    {% if record_id %}
+
+                        #{{ record_id }}
+
+                    {% else %}
+
+                        N/A
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- STORAGE -->
+
+            <div>
+
+                <span>
+                    Storage
+                </span>
+
+                <strong>
+                    SQLite
+                </strong>
+
+            </div>
+
+
+
+            <!-- ENCRYPTION -->
+
+            <div>
+
+                <span>
+                    Encryption
+                </span>
+
+                <strong>
+                    Fernet
+                </strong>
+
+            </div>
+
+
+
+            <!-- DATA STATUS -->
+
+            <div>
+
+                <span>
+                    Data Status
+                </span>
+
+                <strong>
+                    PROTECTED
+                </strong>
+
+            </div>
+
+
+
+            <!-- LAST UPDATE -->
+
+            <div>
+
+                <span>
+                    Last Update
+                </span>
+
+                <strong style="font-size:14px;">
+
+                    {% if timestamp %}
+
+                        {{ timestamp }}
+
+                    {% else %}
+
+                        N/A
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY PROCESS
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🛡️ Data Security Process
+        </h2>
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Step
+                    </th>
+
+                    <th>
+                        Security Process
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <!-- STEP 1 -->
+
+                <tr>
+
+                    <td>
+                        1
+                    </td>
+
+                    <td>
+                        Drone generates telemetry
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                </tr>
+
+
+
+                <!-- STEP 2 -->
+
+                <tr>
+
+                    <td>
+                        2
+                    </td>
+
+                    <td>
+                        Telemetry is encrypted
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                </tr>
+
+
+
+                <!-- STEP 3 -->
+
+                <tr>
+
+                    <td>
+                        3
+                    </td>
+
+                    <td>
+                        Encrypted data stored in SQLite
+                    </td>
+
+                    <td class="safe">
+                        PROTECTED
+                    </td>
+
+                </tr>
+
+
+
+                <!-- STEP 4 -->
+
+                <tr>
+
+                    <td>
+                        4
+                    </td>
+
+                    <td>
+                        Authorized application requests data
+                    </td>
+
+                    <td class="safe">
+                        VERIFIED
+                    </td>
+
+                </tr>
+
+
+
+                <!-- STEP 5 -->
+
+                <tr>
+
+                    <td>
+                        5
+                    </td>
+
+                    <td>
+                        Data is decrypted for authorized use
+                    </td>
+
+                    <td class="safe">
+                        SECURE
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY INFORMATION
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            ℹ️ Security Information
+        </h2>
+
+
+
+        <!-- CONFIDENTIALITY -->
+
+        <div class="alert-box">
+
+            <div>
+
+                <strong>
+                    🔐 Confidentiality
+                </strong>
+
+                <p>
+                    Drone telemetry is encrypted before
+                    database storage.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+
+        <!-- INTEGRITY -->
+
+        <div class="alert-box">
+
+            <div>
+
+                <strong>
+                    🛡️ Integrity
+                </strong>
+
+                <p>
+                    Protected data cannot be directly
+                    interpreted from the database.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+
+        <!-- ACCESS CONTROL -->
+
+        <div class="alert-box">
+
+            <div>
+
+                <strong>
+                    🔑 Access Control
+                </strong>
+
+                <p>
+                    Decryption is performed by the
+                    authorized application.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div style="
+        text-align:center;
+        padding:25px;
+        color:#64748b;
+        font-size:13px;
+    ">
+
+
+        <strong>
+            SecureDrone
+        </strong>
+
+
+        <br>
+
+
+        Drone Cyber Security & Data Protection System
+
+
+        <br><br>
+
+
+        🔐 Encrypted Telemetry
+        &nbsp; • &nbsp;
+        🛡️ Data Protection
+        &nbsp; • &nbsp;
+        🔑 Secure Access
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

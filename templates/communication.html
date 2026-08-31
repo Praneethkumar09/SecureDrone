@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureDrone - Communication Security</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* =========================================
+           SIDEBAR NAVIGATION
+        ========================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 250px;
+            height: 100vh;
+
+            z-index: 9999;
+        }
+
+        .sidebar .menu {
+            position: relative;
+            z-index: 10000;
+        }
+
+        .sidebar .menu a {
+            display: block;
+            position: relative;
+
+            z-index: 10001;
+
+            cursor: pointer;
+            pointer-events: auto;
+
+            text-decoration: none;
+        }
+
+        .main {
+            margin-left: 250px;
+        }
+
+
+        /* =========================================
+           TABLE CONTAINER
+        ========================================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+
+        /* =========================================
+           COMMUNICATION STATUS
+        ========================================= */
+
+        .communication-status {
+            background: #f0fdf4;
+
+            border-left: 5px solid #22c55e;
+
+            padding: 18px 20px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .communication-status strong {
+            color: #166534;
+        }
+
+        .communication-status p {
+            margin-bottom: 0;
+            color: #64748b;
+        }
+
+
+        /* =========================================
+           STATUS BADGES
+        ========================================= */
+
+        .status-badge {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .status-safe {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+
+        /* =========================================
+           SIGNAL BAR
+        ========================================= */
+
+        .signal-bar {
+            width: 100%;
+            height: 12px;
+
+            background: #e5e7eb;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            margin-top: 10px;
+        }
+
+        .signal-level {
+            width: 94%;
+            height: 100%;
+
+            background: #22c55e;
+
+            border-radius: 10px;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .sidebar {
+                width: 220px;
+            }
+
+            .main {
+                margin-left: 220px;
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        🚁 SecureDrone
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+
+        <!-- DASHBOARD -->
+
+        <a href="{{ url_for('dashboard') }}">
+
+            🏠 Dashboard
+
+        </a>
+
+
+        <!-- DRONE MONITOR -->
+
+        <a href="{{ url_for('drone_monitor') }}">
+
+            🚁 Drone Monitor
+
+        </a>
+
+
+        <!-- SECURITY ALERTS -->
+
+        <a href="{{ url_for('alerts') }}">
+
+            🚨 Security Alerts
+
+        </a>
+
+
+        <!-- DATA PROTECTION -->
+
+        <a href="{{ url_for('data_protection') }}">
+
+            🔐 Data Protection
+
+        </a>
+
+
+        <!-- COMMUNICATION -->
+
+        <a href="{{ url_for('communication') }}"
+           class="active">
+
+            📡 Communication
+
+        </a>
+
+
+        <!-- SECURITY LOGS -->
+
+        <a href="{{ url_for('security_logs') }}">
+
+            📋 Security Logs
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="main">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="header">
+
+
+        <div>
+
+            <h1>
+                Communication Security
+            </h1>
+
+            <p>
+                Secure Drone Communication & Network Monitoring
+            </p>
+
+        </div>
+
+
+        <div class="status">
+
+            🟢 Communication Secure
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         COMMUNICATION STATUS
+    ================================================== -->
+
+    <div class="communication-status">
+
+        <strong>
+            🛡️ Communication Security System Active
+        </strong>
+
+        <p>
+            Drone communication channels are being monitored
+            for unauthorized access, packet injection,
+            interception and other network threats.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         COMMUNICATION STATUS CARDS
+    ================================================== -->
+
+    <div class="cards">
+
+
+        <!-- SIGNAL -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📶
+            </div>
+
+            <div>
+
+                <h3>
+                    Signal Strength
+                </h3>
+
+                <h2>
+                    94%
+                </h2>
+
+                <p>
+                    Strong Connection
+                </p>
+
+                <div class="signal-bar">
+
+                    <div class="signal-level"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ENCRYPTION -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <h3>
+                    Encryption
+                </h3>
+
+                <h2>
+                    ACTIVE
+                </h2>
+
+                <p>
+                    AES Protected
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SESSION -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔑
+            </div>
+
+            <div>
+
+                <h3>
+                    Secure Session
+                </h3>
+
+                <h2>
+                    ACTIVE
+                </h2>
+
+                <p>
+                    Authentication Verified
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INTERCEPTION -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h3>
+                    Interception
+                </h3>
+
+                <h2>
+                    NONE
+                </h2>
+
+                <p>
+                    No Threat Detected
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         COMMUNICATION INFORMATION
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            📡 Communication Information
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <div>
+
+                <span>
+                    Communication Protocol
+                </span>
+
+                <strong>
+                    Secure UDP
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Authentication
+                </span>
+
+                <strong>
+                    VERIFIED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Encryption
+                </span>
+
+                <strong>
+                    AES-256
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Session
+                </span>
+
+                <strong>
+                    SECURE
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Packet Integrity
+                </span>
+
+                <strong>
+                    VERIFIED
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         NETWORK TRAFFIC
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            📊 Network Traffic Monitoring
+        </h2>
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Parameter
+                        </th>
+
+                        <th>
+                            Value
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Security Analysis
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            Data Packets
+                        </td>
+
+                        <td>
+                            1,284
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                NORMAL
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Normal packet flow
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Encrypted Packets
+                        </td>
+
+                        <td>
+                            1,284
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                SECURE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            All packets encrypted
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Packet Loss
+                        </td>
+
+                        <td>
+                            0.8%
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                NORMAL
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Within safe threshold
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Unknown Packets
+                        </td>
+
+                        <td>
+                            0
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                SAFE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            No suspicious packets
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Interception Attempts
+                        </td>
+
+                        <td>
+                            0
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                NONE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            No interception detected
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY CONTROLS
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🛡️ Communication Security Controls
+        </h2>
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Security Control
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            🔐 Data Encryption
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                ACTIVE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Communication data is encrypted
+                            before transmission.
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            🔑 Authentication
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                VERIFIED
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Only authenticated devices can
+                            communicate with the drone.
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            🛡️ Packet Integrity
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                ACTIVE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Packets are checked for
+                            unauthorized modification.
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            🚨 Intrusion Detection
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                ACTIVE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Suspicious communication activity
+                            is monitored.
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            📡 Signal Monitoring
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                ACTIVE
+                            </span>
+
+                        </td>
+
+                        <td>
+                            Communication signal quality is
+                            continuously monitored.
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         THREAT DETECTION
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🚨 Communication Threat Detection
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <div>
+
+                <span>
+                    Man-in-the-Middle
+                </span>
+
+                <strong>
+                    🟢 NOT DETECTED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Packet Injection
+                </span>
+
+                <strong>
+                    🟢 NOT DETECTED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Replay Attack
+                </span>
+
+                <strong>
+                    🟢 NOT DETECTED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Signal Jamming
+                </span>
+
+                <strong>
+                    🟢 NOT DETECTED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Unauthorized Device
+                </span>
+
+                <strong>
+                    🟢 NOT DETECTED
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         COMMUNICATION LOG
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            📋 Recent Communication Logs
+        </h2>
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Time
+                        </th>
+
+                        <th>
+                            Event
+                        </th>
+
+                        <th>
+                            Source
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            21:50:12
+                        </td>
+
+                        <td>
+                            Secure connection established
+                        </td>
+
+                        <td>
+                            DRN_001
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                SUCCESS
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            21:49:58
+                        </td>
+
+                        <td>
+                            Encryption key verified
+                        </td>
+
+                        <td>
+                            DRN_001
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                VERIFIED
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            21:49:41
+                        </td>
+
+                        <td>
+                            Packet integrity check
+                        </td>
+
+                        <td>
+                            DRN_001
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                PASSED
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            21:49:20
+                        </td>
+
+                        <td>
+                            Network traffic analyzed
+                        </td>
+
+                        <td>
+                            Security Engine
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge status-safe">
+                                NORMAL
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURE COMMUNICATION PROCESS
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🔄 Secure Communication Process
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <div>
+
+                <span>
+                    1️⃣ Device Authentication
+                </span>
+
+                <strong>
+                    ✓ VERIFIED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    2️⃣ Encryption
+                </span>
+
+                <strong>
+                    ✓ AES-256
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    3️⃣ Secure Transmission
+                </span>
+
+                <strong>
+                    ✓ ACTIVE
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    4️⃣ Integrity Verification
+                </span>
+
+                <strong>
+                    ✓ PASSED
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    5️⃣ Threat Detection
+                </span>
+
+                <strong>
+                    ✓ MONITORING
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div class="footer">
+
+
+        <strong>
+            SecureDrone
+        </strong>
+
+
+        <br>
+
+
+        Drone Cyber Security & Data Protection System
+
+
+        <br><br>
+
+
+        📡 Secure Communication
+        &nbsp; • &nbsp;
+        🔐 Encryption
+        &nbsp; • &nbsp;
+        🛡️ Threat Detection
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

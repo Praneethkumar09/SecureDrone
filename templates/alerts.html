@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureDrone - Security Alerts</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* ================================
+           SIDEBAR
+        ================================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            z-index: 9999;
+        }
+
+        .sidebar .menu {
+            position: relative;
+            z-index: 10000;
+        }
+
+        .sidebar .menu a {
+            display: block;
+            position: relative;
+            z-index: 10001;
+            cursor: pointer;
+            pointer-events: auto;
+            text-decoration: none;
+        }
+
+        .main {
+            margin-left: 250px;
+        }
+
+
+        /* ================================
+           TABLE
+        ================================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+
+        /* ================================
+           SEVERITY
+        ================================= */
+
+        .high {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .medium {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .low {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+
+    <div class="logo">
+        🚁 SecureDrone
+    </div>
+
+
+    <div class="menu">
+
+
+        <a href="{{ url_for('dashboard') }}">
+            🏠 Dashboard
+        </a>
+
+
+        <a href="{{ url_for('drone_monitor') }}">
+            🚁 Drone Monitor
+        </a>
+
+
+        <a href="{{ url_for('alerts') }}"
+           class="active">
+            🚨 Security Alerts
+        </a>
+
+
+        <a href="{{ url_for('data_protection') }}">
+            🔐 Data Protection
+        </a>
+
+
+        <a href="{{ url_for('communication') }}">
+            📡 Communication
+        </a>
+
+
+        <a href="{{ url_for('security_logs') }}">
+            📋 Security Logs
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="main">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                Security Alerts
+            </h1>
+
+            <p>
+                Drone Cyber Threat Detection & Monitoring
+            </p>
+
+        </div>
+
+
+        <div class="status">
+            🛡️ Monitoring Active
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SUMMARY CARDS
+    ================================================== -->
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🚨
+            </div>
+
+            <div>
+
+                <h3>
+                    Total Alerts
+                </h3>
+
+                <h2>
+                    {{ alerts|length }}
+                </h2>
+
+                <p>
+                    Security Events
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔴
+            </div>
+
+            <div>
+
+                <h3>
+                    High Severity
+                </h3>
+
+                <h2>
+
+                    {% set high_count = 0 %}
+
+                    {% for alert in alerts %}
+
+                        {% if alert.severity == "HIGH" %}
+
+                            {% set high_count = high_count + 1 %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {{ high_count }}
+
+                </h2>
+
+                <p>
+                    Critical Events
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🟠
+            </div>
+
+            <div>
+
+                <h3>
+                    Medium Severity
+                </h3>
+
+                <h2>
+
+                    {% set medium_count = 0 %}
+
+                    {% for alert in alerts %}
+
+                        {% if alert.severity == "MEDIUM" %}
+
+                            {% set medium_count = medium_count + 1 %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {{ medium_count }}
+
+                </h2>
+
+                <p>
+                    Warning Events
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🟢
+            </div>
+
+            <div>
+
+                <h3>
+                    System
+                </h3>
+
+                <h2>
+                    ACTIVE
+                </h2>
+
+                <p>
+                    Threat Monitoring
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY EVENT LOG
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🚨 Security Event Log
+        </h2>
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Time</th>
+
+                        <th>Drone ID</th>
+
+                        <th>Threat Type</th>
+
+                        <th>Severity</th>
+
+                        <th>Description</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for alert in alerts %}
+
+                    <tr>
+
+
+                        <td>
+                            #{{ alert.id }}
+                        </td>
+
+
+                        <td>
+                            {{ alert.timestamp }}
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                {{ alert.drone_id }}
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            {{ alert.alert_type }}
+                        </td>
+
+
+                        <td>
+
+                            {% if alert.severity == "HIGH" %}
+
+                                <span class="high">
+                                    🔴 HIGH
+                                </span>
+
+                            {% elif alert.severity == "MEDIUM" %}
+
+                                <span class="medium">
+                                    🟠 MEDIUM
+                                </span>
+
+                            {% else %}
+
+                                <span class="low">
+                                    🟢 LOW
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+                            {{ alert.description }}
+                        </td>
+
+
+                        <td>
+
+                            {% if alert.status == "BLOCKED" %}
+
+                                <span class="safe">
+                                    🛡️ BLOCKED
+                                </span>
+
+                            {% elif alert.status == "DETECTED" %}
+
+                                <span class="high">
+                                    🚨 DETECTED
+                                </span>
+
+                            {% elif alert.status == "MONITORING" %}
+
+                                <span class="medium">
+                                    🟠 MONITORING
+                                </span>
+
+                            {% else %}
+
+                                <span class="safe">
+                                    {{ alert.status }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="7"
+                            style="text-align:center; padding:30px;">
+
+                            🟢 No security alerts found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         THREAT CATEGORIES
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🛡️ Detected Threat Categories
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <div>
+
+                <span>
+                    📍 GPS Spoofing
+                </span>
+
+                <strong>
+                    Detection Active
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    🔐 Unauthorized Access
+                </span>
+
+                <strong>
+                    Protection Active
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    📡 Communication
+                </span>
+
+                <strong>
+                    Monitoring
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    📍 Geofence
+                </span>
+
+                <strong>
+                    Monitoring
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    🦠 Malware
+                </span>
+
+                <strong>
+                    Detection Active
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         THREAT DETECTION PROCESS
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🔄 Threat Detection Process
+        </h2>
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>Step</th>
+
+                    <th>Security Operation</th>
+
+                    <th>Result</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <tr>
+
+                    <td>1</td>
+
+                    <td>
+                        Monitor drone activity
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>2</td>
+
+                    <td>
+                        Analyze telemetry and network activity
+                    </td>
+
+                    <td class="safe">
+                        ANALYZING
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>3</td>
+
+                    <td>
+                        Detect abnormal behavior
+                    </td>
+
+                    <td class="safe">
+                        DETECTION ACTIVE
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>4</td>
+
+                    <td>
+                        Generate security alert
+                    </td>
+
+                    <td class="safe">
+                        AUTOMATIC
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>5</td>
+
+                    <td>
+                        Block or monitor threat
+                    </td>
+
+                    <td class="safe">
+                        PROTECTED
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div class="footer">
+
+        <strong>
+            SecureDrone
+        </strong>
+
+        <br>
+
+        Drone Cyber Security & Data Protection System
+
+        <br>
+
+        🚨 Threat Detection
+        •
+        🛡️ Intrusion Protection
+        •
+        📍 GPS Security
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

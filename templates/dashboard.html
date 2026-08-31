@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureDrone Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        🚁 SecureDrone
+    </div>
+
+
+    <div class="menu">
+
+        <!-- DASHBOARD -->
+        <a href="{{ url_for('dashboard') }}"
+           class="active">
+            🏠 Dashboard
+        </a>
+
+
+        <!-- DRONE MONITOR -->
+        <a href="{{ url_for('drone_monitor') }}">
+            🚁 Drone Monitor
+        </a>
+
+
+        <!-- SECURITY ALERTS -->
+        <a href="{{ url_for('alerts') }}">
+            🚨 Security Alerts
+        </a>
+
+
+        <!-- DATA PROTECTION -->
+        <a href="{{ url_for('data_protection') }}">
+            🔐 Data Protection
+        </a>
+
+
+        <!-- COMMUNICATION -->
+        <a href="{{ url_for('communication') }}">
+            📡 Communication
+        </a>
+
+
+        <!-- SECURITY LOGS -->
+        <a href="{{ url_for('security_logs') }}">
+            📋 Security Logs
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="main">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                Drone Security Dashboard
+            </h1>
+
+            <p>
+                Real-time Cyber Security & Data Protection
+            </p>
+
+        </div>
+
+
+        <div class="status">
+            🟢 System Secure
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STATUS CARDS
+    ================================================== -->
+
+    <div class="cards">
+
+
+        <!-- DRONE STATUS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🚁
+            </div>
+
+            <div>
+
+                <h3>
+                    Drone Status
+                </h3>
+
+                <h2>
+                    ONLINE
+                </h2>
+
+                <p>
+                    Connected
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BATTERY -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔋
+            </div>
+
+            <div>
+
+                <h3>
+                    Battery
+                </h3>
+
+                <h2>
+
+                    {% if telemetry %}
+                        {{ telemetry.battery }}%
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </h2>
+
+                <p>
+                    Battery Level
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GPS STATUS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📍
+            </div>
+
+            <div>
+
+                <h3>
+                    GPS Status
+                </h3>
+
+                <h2>
+
+                    {% if telemetry %}
+                        {{ telemetry.gps_status }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </h2>
+
+                <p>
+                    GPS Security
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ENCRYPTION -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <h3>
+                    Encryption
+                </h3>
+
+                <h2>
+                    ACTIVE
+                </h2>
+
+                <p>
+                    Data Protected
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LIVE DRONE TELEMETRY
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            📡 Live Drone Telemetry
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <!-- LATITUDE -->
+
+            <div>
+
+                <span>
+                    Latitude
+                </span>
+
+                <strong>
+
+                    {% if telemetry %}
+                        {{ telemetry.latitude }}°
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- LONGITUDE -->
+
+            <div>
+
+                <span>
+                    Longitude
+                </span>
+
+                <strong>
+
+                    {% if telemetry %}
+                        {{ telemetry.longitude }}°
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- ALTITUDE -->
+
+            <div>
+
+                <span>
+                    Altitude
+                </span>
+
+                <strong>
+
+                    {% if telemetry %}
+                        {{ telemetry.altitude }} m
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- SPEED -->
+
+            <div>
+
+                <span>
+                    Speed
+                </span>
+
+                <strong>
+
+                    {% if telemetry %}
+                        {{ telemetry.speed }} km/h
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- SIGNAL -->
+
+            <div>
+
+                <span>
+                    Signal
+                </span>
+
+                <strong>
+                    Strong
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         DATA PROTECTION
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🔐 Data Protection
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <div>
+
+                <span>
+                    Encryption
+                </span>
+
+                <strong>
+                    ACTIVE
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Algorithm
+                </span>
+
+                <strong>
+                    Fernet
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Storage
+                </span>
+
+                <strong>
+                    Encrypted
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Key Status
+                </span>
+
+                <strong>
+                    Protected
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Decryption
+                </span>
+
+                <strong>
+                    Authorized
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         DATABASE INFORMATION
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🗄️ Database Information
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <!-- RECORD ID -->
+
+            <div>
+
+                <span>
+                    Record ID
+                </span>
+
+                <strong>
+
+                    {% if telemetry %}
+                        #{{ telemetry.id }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- GPS SECURITY -->
+
+            <div>
+
+                <span>
+                    GPS Security
+                </span>
+
+                <strong>
+
+                    {% if telemetry %}
+                        {{ telemetry.gps_status }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- LAST UPDATE -->
+
+            <div>
+
+                <span>
+                    Last Update
+                </span>
+
+                <strong style="font-size:14px;">
+
+                    {% if telemetry %}
+                        {{ telemetry.timestamp }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- STORAGE -->
+
+            <div>
+
+                <span>
+                    Storage
+                </span>
+
+                <strong>
+                    SQLite
+                </strong>
+
+            </div>
+
+
+
+            <!-- DATA STATUS -->
+
+            <div>
+
+                <span>
+                    Data Status
+                </span>
+
+                <strong>
+                    Protected
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY MONITORING
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🛡️ Security Monitoring
+        </h2>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Security Parameter
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <!-- AUTHENTICATION -->
+
+                <tr>
+
+                    <td>
+                        🔑 Authentication
+                    </td>
+
+                    <td class="safe">
+                        SECURE
+                    </td>
+
+                    <td>
+                        Authorized user access
+                    </td>
+
+                </tr>
+
+
+
+                <!-- GPS SPOOFING -->
+
+                <tr>
+
+                    <td>
+                        📍 GPS Spoofing
+                    </td>
+
+                    <td class="safe">
+
+                        {% if telemetry %}
+                            {{ telemetry.gps_status }}
+                        {% else %}
+                            NORMAL
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        Monitoring abnormal GPS activity
+                    </td>
+
+                </tr>
+
+
+
+                <!-- DATA ENCRYPTION -->
+
+                <tr>
+
+                    <td>
+                        🔐 Data Encryption
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                    <td>
+                        Telemetry data encrypted before storage
+                    </td>
+
+                </tr>
+
+
+
+                <!-- COMMUNICATION -->
+
+                <tr>
+
+                    <td>
+                        📡 Communication
+                    </td>
+
+                    <td class="safe">
+                        SECURE
+                    </td>
+
+                    <td>
+                        Secure communication channel
+                    </td>
+
+                </tr>
+
+
+
+                <!-- INTRUSION DETECTION -->
+
+                <tr>
+
+                    <td>
+                        🛡️ Intrusion Detection
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                    <td>
+                        Network activity monitoring
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- =================================================
+         RECENT SECURITY ALERTS
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🚨 Recent Security Alerts
+        </h2>
+
+
+        <div class="alert-box">
+
+
+            <div>
+
+                <strong>
+                    System Status
+                </strong>
+
+                <p>
+                    Security monitoring system is active.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('alerts') }}">
+                View All Alerts →
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         QUICK ACCESS
+    ================================================== -->
+
+    <div class="section">
+
+        <h2>
+            🔗 Quick Access
+        </h2>
+
+
+        <div class="telemetry">
+
+
+            <div>
+
+                <span>
+                    Data Protection
+                </span>
+
+                <strong>
+
+                    <a href="{{ url_for('data_protection') }}">
+                        Open →
+                    </a>
+
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Security Alerts
+                </span>
+
+                <strong>
+
+                    <a href="{{ url_for('alerts') }}">
+                        Open →
+                    </a>
+
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Communication
+                </span>
+
+                <strong>
+
+                    <a href="{{ url_for('communication') }}">
+                        Open →
+                    </a>
+
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Encryption
+                </span>
+
+                <strong>
+                    ACTIVE
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    System
+                </span>
+
+                <strong>
+                    SECURE
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div style="
+        text-align:center;
+        padding:25px;
+        color:#6b7280;
+        font-size:13px;
+    ">
+
+        <strong>
+            SecureDrone
+        </strong>
+
+        <br>
+
+        Drone Cyber Security & Data Protection System
+
+        <br><br>
+
+        🔐 Encrypted Telemetry
+        •
+        🛡️ Threat Monitoring
+        •
+        📡 Secure Communication
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

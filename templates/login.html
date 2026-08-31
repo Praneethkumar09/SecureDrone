@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureDrone - Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #1e3a8a,
+                    #0f172a
+                );
+
+        }
+
+
+        /* =========================
+           LOGIN CONTAINER
+        ========================= */
+
+        .login-container {
+
+            width: 420px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.35);
+
+            text-align: center;
+
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+
+            font-size: 42px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        h1 {
+
+            font-size: 30px;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .subtitle {
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .input-group {
+
+            text-align: left;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #374151;
+
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+
+        }
+
+
+        .input-group input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.12);
+
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        button:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =========================
+           SECURITY INFO
+        ========================= */
+
+        .security-info {
+
+            margin-top: 25px;
+
+            padding: 12px;
+
+            background: #f0fdf4;
+
+            border: 1px solid #bbf7d0;
+
+            border-radius: 8px;
+
+            color: #166534;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+
+            margin-top: 25px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================================
+     LOGIN BOX
+================================================= -->
+
+<div class="login-container">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+        🚁
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h1>
+        SecureDrone
+    </h1>
+
+
+    <p class="subtitle">
+
+        Drone Cyber Security & Data Protection
+
+    </p>
+
+
+
+    <!-- LOGIN FORM -->
+
+    <form action="{{ url_for('dashboard') }}"
+          method="GET">
+
+
+        <!-- USERNAME -->
+
+        <div class="input-group">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+        </div>
+
+
+
+        <!-- LOGIN -->
+
+        <button type="submit">
+
+            🔐 Login to SecureDrone
+
+        </button>
+
+
+    </form>
+
+
+
+    <!-- SECURITY STATUS -->
+
+    <div class="security-info">
+
+        🛡️ Secure Connection Active
+        <br>
+        🔐 Protected Drone Network
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        SecureDrone Security System
+
+        <br>
+
+        Drone Monitoring • Data Protection • Threat Detection
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

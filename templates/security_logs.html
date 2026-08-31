@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureDrone - Security Logs</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* ===============================
+           SIDEBAR
+        =============================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            z-index: 9999;
+        }
+
+        .menu {
+            position: relative;
+            z-index: 10000;
+        }
+
+        .menu a {
+            display: block;
+            position: relative;
+            z-index: 10001;
+            pointer-events: auto;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* ===============================
+           MAIN
+        =============================== */
+
+        .main {
+            margin-left: 250px;
+        }
+
+        /* ===============================
+           TABLE
+        =============================== */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        /* ===============================
+           FOOTER
+        =============================== */
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+
+    <div class="logo">
+
+        🚁 SecureDrone
+
+    </div>
+
+
+    <div class="menu">
+
+
+        <!-- DASHBOARD -->
+
+        <a href="{{ url_for('dashboard') }}">
+
+            🏠 Dashboard
+
+        </a>
+
+
+        <!-- DRONE MONITOR -->
+
+        <a href="{{ url_for('drone_monitor') }}">
+
+            🚁 Drone Monitor
+
+        </a>
+
+
+        <!-- SECURITY ALERTS -->
+
+        <a href="{{ url_for('alerts') }}">
+
+            🚨 Security Alerts
+
+        </a>
+
+
+        <!-- DATA PROTECTION -->
+
+        <a href="{{ url_for('data_protection') }}">
+
+            🔐 Data Protection
+
+        </a>
+
+
+        <!-- COMMUNICATION -->
+
+        <a href="{{ url_for('communication') }}">
+
+            📡 Communication
+
+        </a>
+
+
+        <!-- SECURITY LOGS -->
+
+        <a href="{{ url_for('security_logs') }}"
+           class="active">
+
+            📋 Security Logs
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="main">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+
+        <div>
+
+            <h1>
+                Security Logs
+            </h1>
+
+            <p>
+                Drone Cyber Security Event History
+            </p>
+
+        </div>
+
+
+        <div class="status">
+
+            🟢 Monitoring Active
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY LOGS
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            📋 Security Event Logs
+        </h2>
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Time
+                        </th>
+
+                        <th>
+                            Drone ID
+                        </th>
+
+                        <th>
+                            Threat Type
+                        </th>
+
+                        <th>
+                            Severity
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for alert in alerts %}
+
+
+                    <tr>
+
+
+                        <td>
+
+                            #{{ alert[0] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ alert[1] }}
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+
+                                {{ alert[2] }}
+
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            {{ alert[3] }}
+
+                        </td>
+
+
+                        <td>
+
+
+                            {% if alert[4] == "HIGH" %}
+
+                                <span style="
+                                    color:#dc2626;
+                                    font-weight:bold;
+                                ">
+
+                                    🔴 HIGH
+
+                                </span>
+
+
+                            {% elif alert[4] == "MEDIUM" %}
+
+                                <span style="
+                                    color:#d97706;
+                                    font-weight:bold;
+                                ">
+
+                                    🟠 MEDIUM
+
+                                </span>
+
+
+                            {% else %}
+
+                                <span style="
+                                    color:#16a34a;
+                                    font-weight:bold;
+                                ">
+
+                                    🟢 LOW
+
+                                </span>
+
+                            {% endif %}
+
+
+                        </td>
+
+
+                        <td>
+
+                            {{ alert[5] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ alert[6] }}
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% else %}
+
+
+                    <tr>
+
+                        <td colspan="7"
+                            style="text-align:center;">
+
+                            🟢 No security logs available.
+
+                        </td>
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY MONITORING
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🛡️ Security Monitoring
+        </h2>
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Security Parameter
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <tr>
+
+                    <td>
+                        Authentication
+                    </td>
+
+                    <td class="safe">
+                        SECURE
+                    </td>
+
+                    <td>
+                        Authorized user authentication
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        GPS Monitoring
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                    <td>
+                        Monitoring GPS anomalies
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Data Encryption
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                    <td>
+                        Telemetry data encrypted
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Communication
+                    </td>
+
+                    <td class="safe">
+                        SECURE
+                    </td>
+
+                    <td>
+                        Encrypted communication channel
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Intrusion Detection
+                    </td>
+
+                    <td class="safe">
+                        ACTIVE
+                    </td>
+
+                    <td>
+                        Network activity monitoring
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECURITY INFORMATION
+    ================================================== -->
+
+    <div class="section">
+
+
+        <h2>
+            🔐 Security Information
+        </h2>
+
+
+        <div class="alert-box">
+
+
+            <div>
+
+                <strong>
+                    🛡️ Continuous Monitoring
+                </strong>
+
+                <p>
+                    SecureDrone continuously monitors
+                    drone activities and records
+                    security-related events.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <br>
+
+
+        <div class="alert-box">
+
+
+            <div>
+
+                <strong>
+                    🔐 Protected Logs
+                </strong>
+
+                <p>
+                    Security events are stored in the
+                    application database for authorized
+                    monitoring and analysis.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div class="footer">
+
+        <strong>
+            SecureDrone
+        </strong>
+
+        <br>
+
+        Drone Cyber Security & Data Protection System
+
+        <br>
+
+        📋 Security Logs
+        •
+        🛡️ Threat Monitoring
+        •
+        🔐 Data Protection
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
