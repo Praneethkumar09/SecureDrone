@@ -147,7 +147,7 @@ SecureDrone/
 ├── README.md
 └── .gitignore
 
-----
+---
 📄 File Description
 
 app.py
@@ -227,7 +227,7 @@ GPS Status
 
 This allows the project to demonstrate drone monitoring without requiring an actual physical drone.
 
-----
+---
 🖥️ Web Application Modules
 
 
@@ -326,7 +326,7 @@ Description
 Status
 
 This allows administrators to review previous security events.
-----
+---
 🔐 Security Features
 
 SecureDrone demonstrates several important cybersecurity concepts.
@@ -383,7 +383,7 @@ Replay Attack	Reuse of previously captured communication
 Man-in-the-Middle	Interception of communication
 Signal Jamming	Disruption of communication signals
 Geofence Breach	Drone entering a restricted area
-----
+---
 
 💾 Database
 
