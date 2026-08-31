@@ -372,6 +372,7 @@ Unauthorized Devices
 
 Security-related events are recorded and displayed through the Security Logs module.
 
+---
 🚨 Threats Considered
 
 Threat	Description
@@ -408,6 +409,7 @@ description
 status
 timestamp
 
+---
 🔑 Encryption
 
 SecureDrone uses the Python cryptography library and Fernet symmetric encryption.
@@ -438,7 +440,9 @@ Fernet Decryption
       ▼
 Telemetry Data
 
+---
 ⚙️ Installation
+
 1. Clone the Repository
 git clone https://github.com/YOUR-USERNAME/SecureDrone.git
 
@@ -488,6 +492,7 @@ Open the browser and visit:
 
 http://127.0.0.1:5000
 
+---
 🖥️ Application Pages
 
 After starting the application, the following pages are available:
@@ -501,6 +506,7 @@ Data Protection	/data-protection
 Communication	/communication
 Security Logs	/security-logs
 
+---
 🔄 Application Workflow
 
 The overall workflow is:
@@ -534,6 +540,7 @@ Speed       : 35 km/h
 Battery     : 82%
 GPS Status  : ACTIVE
 
+---
 🚨 Example Security Alerts
 GPS Spoofing
 Severity : HIGH
@@ -548,6 +555,7 @@ Severity : MEDIUM
 Drone    : DRN_003
 Status   : MONITORING
 
+---
 🧪 Testing
 
 The application can be tested using the following commands.
@@ -574,6 +582,7 @@ Then open:
 
 http://127.0.0.1:5000
 
+---
 🔒 Security Considerations
 
 This project is developed as an educational mini project and prototype.
@@ -596,7 +605,9 @@ Audit logging
 Cloud security
 Secure API authentication
 
+---
 🚀 Future Enhancements
+
 1. Real Drone Integration
 
 Connect the system with an actual drone using technologies such as:
@@ -653,6 +664,7 @@ DRN_002
 DRN_003
 DRN_004
 
+---
 🎓 Academic Use
 
 SecureDrone can be used as a B.Tech / Engineering Mini Project demonstrating concepts from:
@@ -666,6 +678,8 @@ Python Programming
 Web Development
 Database Management
 Cryptography
+
+---
 📚 Learning Outcomes
 
 After completing this project, the following concepts can be understood:
@@ -693,6 +707,7 @@ Encryption	Fernet
 Frontend	HTML5 + CSS3
 Version Control	Git
 Repository	GitHub
+---
 
 📜 Disclaimer
 
@@ -701,6 +716,8 @@ SecureDrone is intended for educational and academic purposes.
 The telemetry data used by the project may be simulated and does not represent real drone flight data.
 
 The security detection mechanisms are demonstrations of cybersecurity concepts and should not be considered a complete production security solution.
+
+---
 
 ⭐ Conclusion
 
@@ -722,6 +739,7 @@ Web Development
 
 The system provides a foundation that can be further developed into a real-time drone cybersecurity platform.
 
+---
 ⭐ Support
 
 If you find this project useful, consider giving the repository a ⭐ on GitHub.
